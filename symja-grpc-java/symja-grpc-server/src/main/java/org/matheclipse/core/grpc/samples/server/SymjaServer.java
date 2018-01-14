@@ -25,22 +25,20 @@ import org.matheclipse.core.expression.F;
 
 public class SymjaServer {
 
-    private static final int SERVER_PORT = 50051;
+	private static final int SERVER_PORT = 50051;
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-    	Config.FILESYSTEM_ENABLED=true;
-		F.initSymbols(null, null, true); 
-        // Build server
-        Server server = ServerBuilder.forPort(SERVER_PORT)
-                .addService(new SymjaServiceImpl())  
-                .build();
+	public static void main(String[] args) throws IOException, InterruptedException {
+		Config.FILESYSTEM_ENABLED = true;
+		F.initSymbols(null, null, true);
+		// Build server
+		Server server = ServerBuilder.forPort(SERVER_PORT).addService(new SymjaServiceImpl()).build();
 
-        // Start server
-        System.out.println("Starting SymjaServer on port " + SERVER_PORT);
-        server.start();
+		// Start server
+		System.out.println("Starting SymjaServer on port " + SERVER_PORT);
+		server.start();
 
-        // Keep it running
-        System.out.println("SymjaServer started!");
-        server.awaitTermination();
-    }
+		// Keep it running
+		System.out.println("SymjaServer started!");
+		server.awaitTermination();
+	}
 }
