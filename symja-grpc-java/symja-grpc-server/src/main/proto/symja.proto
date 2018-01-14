@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package org.matheclipse.core.grpc;
+
+message PBFraction { 
+  PBInteger numerator = 1;
+  PBInteger denominator = 2;
+}
+
+message PBInteger {
+  bytes value = 1;
+}
+
+message PBComplex {
+  PBFraction re_value = 1;
+  PBFraction im_value = 2;
+}
+
+
+message PBNum {
+  double value = 1;
+}
+
+message PBComplexNum {
+  double re_value = 1;
+  double im_value = 2;
+}
+
+message PBSymbol {
+  string name = 1;
+}
+
+message PBString {
+  string content = 1;
+}
+
+message PBPattern {
+  bool default_value = 1;
+  PBExpr condition = 2;
+  PBExpr default = 3;
+  PBSymbol symbol = 4;
+}
+
+message PBExpr {
+  oneof atom {
+     PBAST ast = 1;
+     PBSymbol identifier = 2;
+     PBInteger big_integer = 3;
+     PBFraction big_fraction = 4;
+     PBComplex big_complex = 5;
+     PBNum numeric = 6;
+     PBComplexNum complex_numeric = 7; 
+     PBPattern pattern = 8;
+     PBString str = 9;
+  }
+}
+
+message PBAST {
+  PBExpr head = 1;
+  repeated PBExpr arg = 2;
+}
+
+service SymjaService {
+    rpc eval(PBExpr) returns (PBExpr);
+}
