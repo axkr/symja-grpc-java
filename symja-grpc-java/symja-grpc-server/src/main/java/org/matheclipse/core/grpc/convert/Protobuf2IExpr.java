@@ -3,7 +3,9 @@ package org.matheclipse.core.grpc.convert;
 import java.math.BigInteger;
 
 import org.matheclipse.core.expression.F;
+import org.matheclipse.core.expression.SymbolEnumeration;
 import org.matheclipse.core.grpc.PBAST;
+import org.matheclipse.core.grpc.PBBuiltinSymbol;
 import org.matheclipse.core.grpc.PBComplex;
 import org.matheclipse.core.grpc.PBComplexNum;
 import org.matheclipse.core.grpc.PBExpr;
@@ -57,6 +59,8 @@ public class Protobuf2IExpr {
 			return convertAST(message.getAst());
 		case IDENTIFIER:
 			return convertSymbol(message.getIdentifier());
+		case SYMBOL:
+			return convertBuiltInSymbol(message.getSymbol());
 		case STR:
 			return convertString(message.getStr());
 		case PATTERN:
@@ -70,6 +74,10 @@ public class Protobuf2IExpr {
 			return null;
 		}
 		return F.$s(message.getName());
+	}
+	
+	ISymbol convertBuiltInSymbol(final PBBuiltinSymbol message) {
+		return SymbolEnumeration.symbol(message.getId().ordinal());
 	}
 
 	IStringX convertString(final PBString message) {

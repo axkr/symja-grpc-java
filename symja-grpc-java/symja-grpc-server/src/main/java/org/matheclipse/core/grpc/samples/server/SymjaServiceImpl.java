@@ -114,7 +114,7 @@ public class SymjaServiceImpl extends SymjaServiceGrpc.SymjaServiceImplBase {
 			}
 			Validate.printException(buf, e);
 		}
-		return F.Aborted;
+		return F.$Aborted;
 	}
 
 	@Override

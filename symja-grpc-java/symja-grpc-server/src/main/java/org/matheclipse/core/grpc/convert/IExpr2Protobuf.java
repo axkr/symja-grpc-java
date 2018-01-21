@@ -1,6 +1,7 @@
 package org.matheclipse.core.grpc.convert;
 
 import org.matheclipse.core.grpc.PBAST;
+import org.matheclipse.core.grpc.PBBuiltinSymbol;
 import org.matheclipse.core.grpc.PBComplex;
 import org.matheclipse.core.grpc.PBComplexNum;
 import org.matheclipse.core.grpc.PBExpr;
@@ -11,6 +12,7 @@ import org.matheclipse.core.grpc.PBPattern;
 import org.matheclipse.core.grpc.PBString;
 import org.matheclipse.core.grpc.PBSymbol;
 import org.matheclipse.core.interfaces.IAST;
+import org.matheclipse.core.interfaces.IBuiltInSymbol;
 import org.matheclipse.core.interfaces.IComplex;
 import org.matheclipse.core.interfaces.IComplexNum;
 import org.matheclipse.core.interfaces.IExpr;
@@ -30,7 +32,9 @@ public class IExpr2Protobuf {
 
 	public PBExpr convert(final IExpr x) {
 		org.matheclipse.core.grpc.PBExpr.Builder exprBuilder = PBExpr.newBuilder();
-		if (x instanceof ISymbol) {
+		if (x instanceof IBuiltInSymbol) {
+			return exprBuilder.setSymbol(convertBuiltInSymbol((IBuiltInSymbol) x)).build();
+		} else if (x instanceof ISymbol) {
 			return exprBuilder.setIdentifier(convertSymbol((ISymbol) x)).build();
 		}
 		if (x instanceof INumber) {
@@ -60,6 +64,13 @@ public class IExpr2Protobuf {
 			return exprBuilder.setStr(convertStringX((IStringX) x)).build();
 		}
 		return null;
+	}
+
+	public PBBuiltinSymbol convertBuiltInSymbol(final IBuiltInSymbol val) {
+		return PBBuiltinSymbol.//
+				newBuilder().//
+				setIdValue(val.ordinal()).//
+				build();
 	}
 
 	public PBSymbol convertSymbol(final ISymbol val) {

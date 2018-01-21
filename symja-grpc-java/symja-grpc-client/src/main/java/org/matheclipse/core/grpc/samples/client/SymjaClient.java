@@ -385,7 +385,7 @@ public class SymjaClient {
 			}
 		} catch (final AbortException re) {
 			try {
-				return printResult(F.Aborted);
+				return printResult(F.$Aborted);
 			} catch (IOException e) {
 				Validate.printException(buf, e);
 				return "";
