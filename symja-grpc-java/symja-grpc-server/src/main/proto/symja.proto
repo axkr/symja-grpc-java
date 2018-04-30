@@ -30,7 +30,7 @@ message PBComplexNum {
  
 message PBBuiltinSymbol {
   enum ID { 
-      Abort = 0;
+    Abort = 0;
     Abs = 1;
     AbsArg = 2;
     Accumulate = 3;
