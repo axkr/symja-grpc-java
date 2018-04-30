@@ -15,13 +15,13 @@
  */
 package org.matheclipse.core.grpc.samples.server;
 
-import io.grpc.Server;
-import io.grpc.ServerBuilder;
-
 import java.io.IOException;
 
 import org.matheclipse.core.basic.Config;
 import org.matheclipse.core.expression.F;
+
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 
 public class SymjaServer {
 

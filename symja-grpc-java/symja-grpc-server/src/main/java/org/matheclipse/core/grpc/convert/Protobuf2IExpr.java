@@ -3,7 +3,7 @@ package org.matheclipse.core.grpc.convert;
 import java.math.BigInteger;
 
 import org.matheclipse.core.expression.F;
-import org.matheclipse.core.expression.SymbolEnumeration;
+import org.matheclipse.core.expression.BuiltIns;
 import org.matheclipse.core.grpc.PBAST;
 import org.matheclipse.core.grpc.PBBuiltinSymbol;
 import org.matheclipse.core.grpc.PBComplex;
@@ -77,7 +77,7 @@ public class Protobuf2IExpr {
 	}
 	
 	ISymbol convertBuiltInSymbol(final PBBuiltinSymbol message) {
-		return SymbolEnumeration.symbol(message.getId().ordinal());
+		return BuiltIns.symbol(message.getId().ordinal());
 	}
 
 	IStringX convertString(final PBString message) {

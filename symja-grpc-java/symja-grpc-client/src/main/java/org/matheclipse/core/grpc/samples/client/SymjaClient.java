@@ -123,7 +123,7 @@ public class SymjaClient {
 		try {
 			while (true) {
 				try {
-					inputExpression = console.readString(System.out, "▶  ");
+					inputExpression = console.readString(System.out, ">> ");
 					if (inputExpression != null) {
 						trimmedInput = inputExpression.trim();
 						if ((trimmedInput.length() >= 4)
@@ -421,7 +421,7 @@ public class SymjaClient {
 			return "";
 		}
 		if (fUseJavaForm) {
-			return result.internalJavaString(false, -1, false, true);
+			return result.internalJavaString(false, -1, false, false, true);
 		}
 		StringBuilder strBuffer = new StringBuilder();
 		fOutputFactory.reset();
